@@ -6,21 +6,21 @@ workflows:
     jobs:
       - terraform/fmt:
           checkout: true
-          context: terraform
+          path: main.tf
       - terraform/validate:
           checkout: true
-          context: terraform
+          path: main.tf
           requires:
             - terraform/fmt
       - terraform/plan:
           checkout: true
-          context: terraform
+          path: main.tf
           persist-workspace: true
           requires:
             - terraform/validate
       - terraform/apply:
           attach-workspace: true
-          context: terraform
+          path: main.tf
           filters:
             branches:
               only: main
